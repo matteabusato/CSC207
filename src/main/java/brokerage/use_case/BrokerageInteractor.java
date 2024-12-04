@@ -5,6 +5,8 @@ import entity.Stock;
 import entity.StockFactory;
 import com.crazzyghost.alphavantage.timeseries.response.StockUnit;
 import entity.User;
+import maketransaction.use_case.MakeTransactionOutputData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,18 +32,18 @@ public class BrokerageInteractor implements BrokerageInputBoundary {
             brokerageOutputBoundary.prepareFailView("Insert Stock Symbol");
         }
         else {
-            // final List<StockUnit> stocks = stockApi.execute(stockSymbol);
-            //final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
-            //        stocks.get(0).getClose(), stocks);
+            final List<StockUnit> stocks = stockApi.execute(stockSymbol);
             final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
-                    10, new ArrayList<StockUnit>());
+                    stocks.get(0).getClose(), stocks);
+            //final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
+            //        10, new ArrayList<StockUnit>());
             brokerageOutputBoundary.prepareTradeView(brokerageOutputData);
         }
     }
 
     @Override
     public void tradeStock(BrokerageInputData input) {
-        final User user = input.getUser();
+        User user = input.getUser();
         final String stockSymbol = input.getStockSymbol();
         final int quantity = input.getQuantity();
         final double price = input.getPrice();
@@ -50,12 +52,16 @@ public class BrokerageInteractor implements BrokerageInputBoundary {
         if (-1 * quantity > quantityOwned) {
             brokerageOutputBoundary.prepareFailView("You don't have enough shares. You currently have " + quantityOwned + " shares of " + stockSymbol + ". ");
         }
+        else if (quantity * price > user.getBalance()) {
+            brokerageOutputBoundary.prepareFailView("You don't have enough balance. ");
+        }
         else {
             Stock stock = stockFactory.create(stockSymbol, quantity, price);
-            brokerageDataAccessInterface.saveData(user.getUserID(), stock);
+            user = brokerageDataAccessInterface.saveData(user.getUserID(), stock);
             final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, quantity, price,
                     new ArrayList<StockUnit>());
             brokerageOutputBoundary.prepareSuccessView(brokerageOutputData);
+
         }
     }
 

@@ -27,7 +27,7 @@ public class DBBrokerageDataAccessObject implements BrokerageDataAccessInterface
      */
     @Override
     public User saveData(int userID, Stock stock) {
-        final User user = usersController.get(userID);
+        User user = usersController.get(userID);
         final List<Stock> stocks = controller.readData(user.getFileDirectory()
                 + FileSystems.getDefault().getSeparator() + directory, Stock.class);
         final boolean success = checkExistence(stock.getStockID(), stocks);
@@ -41,7 +41,9 @@ public class DBBrokerageDataAccessObject implements BrokerageDataAccessInterface
             controller.saveData(user.getFileDirectory()
                     + FileSystems.getDefault().getSeparator() + directory, stocks, Stock.class);
         }
-        return updateBalance(user, stock);
+        user = updateBalance(user, stock);
+        usersController.updateDataPoint(user.getUserID(), user);
+        return user;
     }
 
     /**

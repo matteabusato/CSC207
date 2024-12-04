@@ -31,8 +31,8 @@ public class BrokerageController {
      * @param stockSymbol symbol
      * @param quantity quantity
      */
-    public void tradeStock(User user, String stockSymbol, int quantity) {
-        final BrokerageInputData brokerageInputData = new BrokerageInputData(user, stockSymbol, quantity, 0);
+    public void tradeStock(User user, String stockSymbol, int quantity, double price) {
+        final BrokerageInputData brokerageInputData = new BrokerageInputData(user, stockSymbol, quantity, price);
         brokerageInteractor.tradeStock(brokerageInputData);
     }
 

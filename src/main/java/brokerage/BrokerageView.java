@@ -97,6 +97,9 @@ public class BrokerageView extends JPanel implements ActionListener, PropertyCha
         sellButton = new JButton("Sell");
         cancelButton = new JButton("Cancel");
 
+        bottomPanel.add(cancelButton);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         searchStockButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -115,7 +118,8 @@ public class BrokerageView extends JPanel implements ActionListener, PropertyCha
                     public void actionPerformed(ActionEvent event) {
                         if (event.getSource().equals(buyButton)) {
                             BrokerageState state = brokerageViewModel.getState();
-                            brokerageController.tradeStock(state.getUser(), state.getStockSymbol(), state.getQuantity());
+                            brokerageController.tradeStock(state.getUser(), state.getStockSymbol(), state.getQuantity(),
+                                    state.getPrice());
                         }
                     }
                 }
@@ -127,7 +131,8 @@ public class BrokerageView extends JPanel implements ActionListener, PropertyCha
                     public void actionPerformed(ActionEvent event) {
                         if (event.getSource().equals(sellButton)) {
                             BrokerageState state = brokerageViewModel.getState();
-                            brokerageController.tradeStock(state.getUser(), state.getStockSymbol(), -1 * state.getQuantity());
+                            brokerageController.tradeStock(state.getUser(), state.getStockSymbol(),
+                                    -1 * state.getQuantity(), state.getPrice());
                         }
                     }
                 }
@@ -182,6 +187,7 @@ public class BrokerageView extends JPanel implements ActionListener, PropertyCha
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final BrokerageState state = (BrokerageState) evt.getNewValue();
+        brokerageViewModel.setState(state);
         setFields(state);
     }
 

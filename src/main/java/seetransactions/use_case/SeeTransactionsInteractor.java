@@ -1,10 +1,5 @@
 package seetransactions.use_case;
 
-import java.util.List;
-
-import entity.Transaction;
-import entity.User;
-
 /**
  * View class for handling the see transactions interface.
  */

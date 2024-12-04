@@ -32,6 +32,14 @@ public class LoggedinController {
 
     /**
      * Executes the "switch to SignupView" Use Case.
+     * @param user param
+     */
+    public void switchToBrokerageView(User user) {
+        loggedUseCaseInteractor.switchToBrokerageView(user);
+    }
+
+    /**
+     * Executes the "switch to SignupView" Use Case.
      */
     public void switchToWelcomeView() {
         loggedUseCaseInteractor.switchToWelcomeView();

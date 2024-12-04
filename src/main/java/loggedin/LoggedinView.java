@@ -72,7 +72,7 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
         buttons.add(seeTransactionHistory);
         manageCards = new JButton("Manage Cards");
         buttons.add(manageCards);
-        manageAssets = new JButton("Manage Assets");
+        manageAssets = new JButton("Brokerage Assets");
         buttons.add(manageAssets);
         manageHouses = new JButton("Manage Houses");
         buttons.add(manageHouses);
@@ -106,6 +106,13 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         loggedinController.switchToSeeTransactionHistoryView(loggedinUser);
+                    }
+                }
+        );
+        manageAssets.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        loggedinController.switchToBrokerageView(loggedinUser);
                     }
                 }
         );

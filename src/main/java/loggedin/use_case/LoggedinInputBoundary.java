@@ -20,6 +20,12 @@ public interface LoggedinInputBoundary {
 
     /**
      * Executes the switch to signup view use case.
+     * @param user param
+     */
+    void switchToBrokerageView(User user);
+
+    /**
+     * Executes the switch to signup view use case.
      */
     void switchToWelcomeView();
 }

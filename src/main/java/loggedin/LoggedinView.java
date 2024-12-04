@@ -31,6 +31,7 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
 
     private User loggedinUser;
     private final JLabel name;
+    private final JLabel userID;
     private final JLabel balance;
 
     private final JLabel userErrorField = new JLabel();
@@ -57,6 +58,8 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
 
         final JLabel userInfo = new JLabel("Currently logged in: ");
         name = new JLabel();
+        final JLabel userIDInfo = new JLabel("User ID: ");
+        userID = new JLabel();
         final JLabel balanceInfo = new JLabel("Balance: ");
         balance = new JLabel();
 
@@ -87,6 +90,8 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
         this.add(title);
         this.add(userInfo);
         this.add(name);
+        this.add(userIDInfo);
+        this.add(userID);
         this.add(balanceInfo);
         this.add(balance);
 
@@ -104,7 +109,6 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
                     }
                 }
         );
-        // TODO: add other action listeners
 
         logout.addActionListener(this);
 
@@ -126,6 +130,7 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
         final LoggedinState state = (LoggedinState) evt.getNewValue();
         loggedinUser = state.getUser();
         name.setText(state.getUser().getFirstName() + " " + state.getUser().getLastName());
+        userID.setText(String.valueOf(state.getUser().getUserID()));
         balance.setText(String.valueOf(state.getUser().getBalance()));
     }
 

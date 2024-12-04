@@ -19,16 +19,6 @@ public class SeeTransactionsInteractor implements SeeTransactionsInputBoundary {
     }
 
     @Override
-    public void execute(SeeTransactionsInputData seeTransactionsInputData) {
-        final User loggedinUser = seeTransactionsInputData.getUser();
-        final List<Transaction> transactions = seeTransactionsDataAccessInterface.getTransactions(loggedinUser);
-
-        final SeeTransactionsOutputData seeTransactionsOutputData = new SeeTransactionsOutputData(loggedinUser,
-                transactions);
-        seeTransactionsOutputBoundary.prepareSuccessView(seeTransactionsOutputData);
-    }
-
-    @Override
     public void switchToLoggedinView() {
         seeTransactionsOutputBoundary.switchToLoggedinView();
     }

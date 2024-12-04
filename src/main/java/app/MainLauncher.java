@@ -54,7 +54,6 @@ public class MainLauncher {
         final ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
-        // TODO: add here
         final WelcomeViewModel welcomeViewModel = new WelcomeViewModel();
         final LoginViewModel loginViewModel = new LoginViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();

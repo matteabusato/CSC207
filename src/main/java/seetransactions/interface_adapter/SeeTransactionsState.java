@@ -10,7 +10,7 @@ import entity.User;
  * The state for the SeeTransactions View Model.
  */
 public class SeeTransactionsState {
-    private User user;
+    private User user = new User();
     private List<Transaction> transactions = new ArrayList<Transaction>();
 
     public User getUser() {

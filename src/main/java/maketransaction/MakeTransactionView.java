@@ -38,7 +38,6 @@ public class MakeTransactionView extends JPanel implements ActionListener, Prope
 
     private final JButton makeTransactionButton;
     private final JButton cancel;
-    // TODO : add connection to db to retrieve cards
 
     private User loggedinUser;
 
@@ -57,7 +56,7 @@ public class MakeTransactionView extends JPanel implements ActionListener, Prope
                 new GridLayout(ROW_COUNT, COLUMN_COUNT, HORIZONTAL_GAP, VERTICAL_GAP));
 
         final JLabel cardLabel = new JLabel("Card:");
-        final String[] cardOptions = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        final String[] cardOptions = {"Groceries", "Stocks", "Savings", "Rent", "Utilities"};
         final JComboBox<String> cardDropdown = new JComboBox<>(cardOptions);
 
         final LabelTextPanel userInfo = new LabelTextPanel(

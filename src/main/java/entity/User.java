@@ -13,7 +13,7 @@ public class User {
     private String lastName;
     private String passwordHash;
     private double balance;
-    private String fileDirectory;
+    private String fileDirectory = "";
 
     public User() {
     }

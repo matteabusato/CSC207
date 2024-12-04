@@ -3,9 +3,12 @@
 <img alt="image info" height="71" src="./resources/logo.png" title="Welcome view" width="100"/>
 
 ### A comprehensive software to access financial information and perform operations under one accessible interface.
-#### Authors _(equal contribution)_: Mattea Busato, Zeyu Cai, Stefano Mauloni, Xing Xu, Yue Zheng
+#### Authors: Mattea Busato, Stefano Mauloni.
 
+#### Proof of Coverage
 
+<img alt="image info" src="./resources/Tests1.png" title="Welcome view" width="250"/>
+<img alt="image info" src="./resources/Tests2.png" title="Welcome view" width="250"/>
 
 ## Project Purpose
 CrazyBank is an all-in-one financial app that combines traditional banking services like account management, 
@@ -51,28 +54,7 @@ The sender just need to know the receiver's ID.
 check its price trend througb an interactive graph, and decide to either buy or sell it. The app does not provide
 fractional share trading or short-selling capabilities, but there are no commission on each trade.
 
-<img alt="image info" height="320" src="./resources/project_assets.png" title="Welcome view" width="450"/>
-
-4) **Loan Maker**: It is possible to request loans. The user decide the size and duration of the loan and the app 
-automatically provides an interest rate most suited to the user.
-
-<img alt="image info" height="290" src="./resources/project_loans.png" title="Welcome view" width="400"/>
-
-5) **Insurance Policies**: The user can request quotes for many kind of insurance policy. They get to choose the 
-type and the size of the insurance, and the app provides them the optimal insurance premium for them.
-[MISSING BUTTON IN CURRENT RELEASE OF THE APP]
-
-<img alt="image info" height="300" src="./resources/project_insurance.png" title="Welcome view" width="300"/>
-
-6) **Real Estate Broker**: Included in the app there is a "House Buying Service". The user can buy a real estate asset
-through the app and potentially include an insurance policy on it, for a complete seamless experience.
-
-<img alt="image info" height="320" src="./resources/project_house_map.png" title="Welcome view" width="320"/>
-
-7) **ATM Finder**: Anywhere in the world, the user has just to type in their current position and the app provides 
-them information about the nearest ATMs. 
-
-<img alt="image info" height="338" src="./resources/project_atm_map.png" title="Welcome view" width="300"/>
+<img alt="image info" height="280" src="./resources/project_assets.png" title="Welcome view" width="450"/>
 
 
 ---
@@ -114,19 +96,12 @@ The application is meant to work on Windows and MacOS. It was not tested on Linu
    Ensure all required dependencies are downloaded by using Maven:
     ```bash
    mvn clean install
-3. **Set Up Configuration Files**
-    - The project relies on AlphaVantage api [AlphaVantage API](https://www.alphavantage.co/). Thus, you need to update the `api_key` property to your own key (you can get a free key easily in their website).
-    - Navigate to the `src/main/resources` folder.
-    - Update the `application.properties` file.
-    - Example:
-      ```properties
-      alphavantage.api.key=your_api_key
-      ```
-4. **Build the Project**  
+
+3. **Build the Project**  
    Run the following command to compile the project:
    ```bash
    mvn compile
-5. **Run the Project**  
+4. **Run the Project**  
    Start the application using the following command:
    ```bash
    mvn spring-boot:run
@@ -201,15 +176,3 @@ the stock and keep it in his portfolio.
 
 Mattea's Story: Emma wants to pay her university fees. She lunches the software, checks her balance and makes a 
 transaction through the app. She can then see the transaction information on her transaction history.
-
-Yue Zheng's Story: Jeff wants to get a new card to spend money for the trip abroad, also he wants to delete the past card
-which used to spend money on paying last year loan. Also before the travel, he wants to change the money into some
-other currency to make the trip easier.
-
-Zeyu's Story: Bob can open the banking app and use it to find ATM around the city(fake). Bob wants to buy a house, he 
-goes on the banking app and see a list of properties displayed on the map which he can purchase.
-
-Xing's Story: Joe can apply for a fixed-term loan from the banking app with interests. 
-Joe can buy insurance through the banking app to make sure he has all the insurance he needs covered.
-
-

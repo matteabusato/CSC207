@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StockApi {
 
-    public static List<StockUnit> execute(String stockSymbol) {
+    public List<StockUnit> execute(String stockSymbol) {
 
         StockApiConfig.initialize();
 

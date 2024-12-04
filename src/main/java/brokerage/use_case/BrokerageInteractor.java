@@ -5,17 +5,16 @@ import entity.Stock;
 import entity.StockFactory;
 import com.crazzyghost.alphavantage.timeseries.response.StockUnit;
 import entity.User;
-import maketransaction.use_case.MakeTransactionOutputData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BrokerageInteractor implements BrokerageInputBoundary {
 
-    private BrokerageDataAccessInterface brokerageDataAccessInterface;
-    private BrokerageOutputBoundary brokerageOutputBoundary;
-    private StockFactory stockFactory;
-    private StockApi stockApi = new StockApi();
+    private final BrokerageDataAccessInterface brokerageDataAccessInterface;
+    private final BrokerageOutputBoundary brokerageOutputBoundary;
+    private final StockFactory stockFactory;
+    StockApi stockApi = new StockApi();
 
     public BrokerageInteractor(BrokerageDataAccessInterface brokerageDataAccessInterface,
                                BrokerageOutputBoundary brokerageOutputBoundary, StockFactory stockFactory) {
@@ -35,8 +34,6 @@ public class BrokerageInteractor implements BrokerageInputBoundary {
             final List<StockUnit> stocks = stockApi.execute(stockSymbol);
             final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
                     stocks.get(0).getClose(), stocks);
-            //final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
-            //        10, new ArrayList<StockUnit>());
             brokerageOutputBoundary.prepareTradeView(brokerageOutputData);
         }
     }
@@ -59,7 +56,7 @@ public class BrokerageInteractor implements BrokerageInputBoundary {
             Stock stock = stockFactory.create(stockSymbol, quantity, price);
             user = brokerageDataAccessInterface.saveData(user.getUserID(), stock);
             final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, quantity, price,
-                    new ArrayList<StockUnit>());
+                    new ArrayList<>());
             brokerageOutputBoundary.prepareSuccessView(brokerageOutputData);
 
         }

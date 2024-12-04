@@ -6,7 +6,7 @@ import entity.User;
  * The state for the Welcome View Model.
  */
 public class LoggedinState {
-    private User user;
+    private User user = new User();
     private String loggedinError;
 
     public User getUser() {

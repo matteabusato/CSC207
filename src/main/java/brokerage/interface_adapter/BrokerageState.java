@@ -11,6 +11,7 @@ public class BrokerageState {
     private double price;
     private int quantity;
     private List<StockUnit> stocks;
+    private String errorMessage = "";
 
     public User getUser() {
         return user;
@@ -50,5 +51,13 @@ public class BrokerageState {
 
     public void setStocks(List<StockUnit> stocks) {
         this.stocks = stocks;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

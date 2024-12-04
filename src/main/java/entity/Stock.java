@@ -10,8 +10,9 @@ package entity;
  */
 public class Stock {
     private String stockID;
-    private double price;
     private int quantity;
+    private double price;
+
 
     /**
      * Default constructor for creating a blank stock object.
@@ -31,7 +32,7 @@ public class Stock {
      * @param price    the current price of the stock
      * @param quantity the quantity of the stock held
      */
-    public Stock(String stockID, double price, int quantity) {
+    public Stock(String stockID, int quantity, double price) {
         this.stockID = stockID;
         this.price = price;
         this.quantity = quantity;

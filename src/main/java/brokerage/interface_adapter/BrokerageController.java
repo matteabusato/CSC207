@@ -32,7 +32,7 @@ public class BrokerageController {
      * @param quantity quantity
      */
     public void tradeStock(User user, String stockSymbol, int quantity) {
-        final BrokerageInputData brokerageInputData = new BrokerageInputData(user, stockSymbol, quantity);
+        final BrokerageInputData brokerageInputData = new BrokerageInputData(user, stockSymbol, quantity, 0);
         brokerageInteractor.tradeStock(brokerageInputData);
     }
 

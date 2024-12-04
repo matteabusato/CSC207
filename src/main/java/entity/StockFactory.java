@@ -3,16 +3,14 @@ package entity;
 public class StockFactory {
     /**
      * Creates a new Transaction.
-     * @param senderID is a parameter
-     * @param receiverID is a parameter
-     * @param cardUsed is a parameter
-     * @param amount is a parameter
-     * @return the new transaction
+     * @param stockID is a parameter
+     * @param price is a parameter
+     * @param quantity is a parameter
+     * @return the new stock
      */
-    public Stock create(int senderID, int receiverID,
-                              String cardUsed, double amount) {
+    public Stock create(String stockID, int quantity, double price) {
 
-        return new Stock();
+        return new Stock(stockID, quantity, price);
     }
 
 }

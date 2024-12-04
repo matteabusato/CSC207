@@ -1,22 +1,11 @@
 package brokerage.use_case;
 
 import brokerage.api.StockApi;
-import com.crazzyghost.alphavantage.timeseries.TimeSeries;
 import entity.Stock;
 import entity.StockFactory;
 import com.crazzyghost.alphavantage.timeseries.response.StockUnit;
 import entity.User;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.time.Second;
-import org.jfree.data.time.TimeSeriesCollection;
-
-import javax.swing.*;
-import java.awt.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrokerageInteractor implements BrokerageInputBoundary {
@@ -35,13 +24,17 @@ public class BrokerageInteractor implements BrokerageInputBoundary {
 
     @Override
     public void searchStock(BrokerageInputData input) {
+        final User user = input.getUser();
         final String stockSymbol = input.getStockSymbol();
         if (stockSymbol.isEmpty()) {
             brokerageOutputBoundary.prepareFailView("Insert Stock Symbol");
         }
         else {
-            final List<StockUnit> stocks = stockApi.execute(stockSymbol);
-            final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(stockSymbol, stocks.get(0).getClose(), stocks);
+            // final List<StockUnit> stocks = stockApi.execute(stockSymbol);
+            //final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
+            //        stocks.get(0).getClose(), stocks);
+            final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, 0,
+                    10, new ArrayList<StockUnit>());
             brokerageOutputBoundary.prepareTradeView(brokerageOutputData);
         }
     }
@@ -51,15 +44,17 @@ public class BrokerageInteractor implements BrokerageInputBoundary {
         final User user = input.getUser();
         final String stockSymbol = input.getStockSymbol();
         final int quantity = input.getQuantity();
-        final Stock stock = input.getStock();
+        final double price = input.getPrice();
 
         final int quantityOwned = brokerageDataAccessInterface.getQuantity(user.getUserID(), stockSymbol);
         if (-1 * quantity > quantityOwned) {
-            brokerageOutputBoundary.prepareFailView("Not enough stock");
+            brokerageOutputBoundary.prepareFailView("You don't have enough shares. You currently have " + quantityOwned + " shares of " + stockSymbol + ". ");
         }
         else {
+            Stock stock = stockFactory.create(stockSymbol, quantity, price);
             brokerageDataAccessInterface.saveData(user.getUserID(), stock);
-            final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, quantity);
+            final BrokerageOutputData brokerageOutputData = new BrokerageOutputData(user, stockSymbol, quantity, price,
+                    new ArrayList<StockUnit>());
             brokerageOutputBoundary.prepareSuccessView(brokerageOutputData);
         }
     }

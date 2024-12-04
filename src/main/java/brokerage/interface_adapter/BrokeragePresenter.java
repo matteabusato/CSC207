@@ -52,6 +52,7 @@ public class BrokeragePresenter implements BrokerageOutputBoundary {
     @Override
     public void prepareFailView(String errorMessage) {
         final BrokerageState brokerageState = brokerageViewModel.getState();
+        brokerageState.setErrorMessage(errorMessage);
         brokerageViewModel.firePropertyChanged();
     }
 

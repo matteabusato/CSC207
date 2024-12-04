@@ -63,7 +63,7 @@ public class LoggedinPresenter implements LoggedinOutputBoundary {
         final BrokerageState brokerageState = brokerageViewModel.getState();
         brokerageState.setUser(user);
         this.brokerageViewModel.setState(brokerageState);
-        this.brokerageViewModel.firePropertyChanged();
+        // this.brokerageViewModel.firePropertyChanged();
 
         viewManagerModel.setState(brokerageViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

@@ -41,7 +41,6 @@ public class MakeTransactionView extends JPanel implements ActionListener, Prope
 
     private User loggedinUser;
 
-    @SuppressWarnings("checkstyle:ExecutableStatementCount")
     public MakeTransactionView(MakeTransactionController makeTransactionController,
                                MakeTransactionViewModel makeTransactionViewModel) {
         setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));

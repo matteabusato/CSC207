@@ -6,6 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import brokerage.BrokerageUseCaseFactory;
+import brokerage.BrokerageView;
+import brokerage.interface_adapter.BrokerageViewModel;
+import data_access.DBBrokerageDataAccessObject;
 import data_access.DBTransactionDataAccessObject;
 import data_access.DBUserDataAccessObject;
 import interface_adapter.ViewManagerModel;
@@ -60,9 +64,11 @@ public class MainLauncher {
         final LoggedinViewModel loggedinViewModel = new LoggedinViewModel();
         final MakeTransactionViewModel makeTransactionViewModel = new MakeTransactionViewModel();
         final SeeTransactionsViewModel seeTransactionsViewModel = new SeeTransactionsViewModel();
+        final BrokerageViewModel brokerageViewModel = new BrokerageViewModel();
 
         final DBUserDataAccessObject userDataAccessObject = new DBUserDataAccessObject();
         final DBTransactionDataAccessObject transactionDataAccessObject = new DBTransactionDataAccessObject();
+        final DBBrokerageDataAccessObject brokerageDataAccessObject = new DBBrokerageDataAccessObject();
 
         final WelcomeView welcomeView = WelcomeUseCaseFactory.create(viewManagerModel, signupViewModel, loginViewModel);
         views.add(welcomeView, welcomeView.getViewName());
@@ -73,7 +79,7 @@ public class MainLauncher {
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
         final LoggedinView loggedinView = LoggedinUseCaseFactory.create(viewManagerModel, welcomeViewModel,
-                makeTransactionViewModel, seeTransactionsViewModel, loggedinViewModel);
+                makeTransactionViewModel, seeTransactionsViewModel, brokerageViewModel, loggedinViewModel);
         views.add(loggedinView, loggedinView.getViewName());
         final MakeTransactionView makeTransactionView = MakeTransactionUseCaseFactory.create(viewManagerModel,
                 loggedinViewModel, makeTransactionViewModel, transactionDataAccessObject);
@@ -81,6 +87,9 @@ public class MainLauncher {
         final SeeTransactionsView seeTransactionsView = SeeTransactionsUseCaseFactory.create(viewManagerModel,
                 loggedinViewModel, seeTransactionsViewModel, transactionDataAccessObject);
         views.add(seeTransactionsView, seeTransactionsView.getViewName());
+        final BrokerageView brokerageView = BrokerageUseCaseFactory.create(viewManagerModel, brokerageViewModel,
+                loggedinViewModel, brokerageDataAccessObject);
+        views.add(brokerageView, brokerageView.getViewName());
 
         viewManagerModel.setState(welcomeView.getViewName());
         viewManagerModel.firePropertyChanged();

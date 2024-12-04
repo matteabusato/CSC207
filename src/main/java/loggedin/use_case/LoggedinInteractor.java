@@ -23,6 +23,11 @@ public class LoggedinInteractor implements LoggedinInputBoundary {
     }
 
     @Override
+    public void switchToBrokerageView(User user) {
+        loggedinOutputBoundary.switchToBrokerageView(user);
+    }
+
+    @Override
     public void switchToWelcomeView() {
         loggedinOutputBoundary.switchToWelcomeView();
     }

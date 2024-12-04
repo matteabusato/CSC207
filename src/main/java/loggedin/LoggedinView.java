@@ -37,14 +37,17 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
     private final JLabel userErrorField = new JLabel();
     private final JButton makeTransaction;
     private final JButton seeTransactionHistory;
-    private final JButton manageCards;
     private final JButton manageAssets;
+    /**
+    private final JButton manageCards;
     private final JButton manageHouses;
     private final JButton manageAtms;
     private final JButton manageLoans;
     private final JButton getLoan;
     private final JButton exchange;
+     */
     private final JButton logout;
+
 
     @SuppressWarnings("checkstyle:ExecutableStatementCount")
     public LoggedinView(LoggedinController controller, LoggedinViewModel loggedinViewModel) {
@@ -70,10 +73,11 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
         buttons.add(makeTransaction);
         seeTransactionHistory = new JButton("See Transaction History");
         buttons.add(seeTransactionHistory);
+        manageAssets = new JButton("Brokerage Assets");
+        buttons.add(manageAssets);
+        /**
         manageCards = new JButton("Manage Cards");
         buttons.add(manageCards);
-        manageAssets = new JButton("Manage Assets");
-        buttons.add(manageAssets);
         manageHouses = new JButton("Manage Houses");
         buttons.add(manageHouses);
         manageAtms = new JButton("Manage Atms");
@@ -84,8 +88,10 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
         buttons.add(getLoan);
         exchange = new JButton("Exchange");
         buttons.add(exchange);
+         */
         logout = new JButton("Log Out");
         buttons.add(logout);
+
 
         this.add(title);
         this.add(userInfo);
@@ -106,6 +112,13 @@ public class LoggedinView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         loggedinController.switchToSeeTransactionHistoryView(loggedinUser);
+                    }
+                }
+        );
+        manageAssets.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        loggedinController.switchToBrokerageView(loggedinUser);
                     }
                 }
         );

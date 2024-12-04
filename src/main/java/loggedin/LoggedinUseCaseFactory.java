@@ -1,5 +1,6 @@
 package loggedin;
 
+import brokerage.interface_adapter.BrokerageViewModel;
 import interface_adapter.ViewManagerModel;
 import loggedin.interface_adapter.LoggedinController;
 import loggedin.interface_adapter.LoggedinPresenter;
@@ -32,10 +33,10 @@ public final class LoggedinUseCaseFactory {
     public static LoggedinView create(
             ViewManagerModel viewManagerModel, WelcomeViewModel welcomeViewModel,
             MakeTransactionViewModel makeTransactionViewModel, SeeTransactionsViewModel seeTransactionsViewModel,
-            LoggedinViewModel loggedinViewModel) {
+            BrokerageViewModel brokerageViewModel, LoggedinViewModel loggedinViewModel) {
 
         final LoggedinController loggedinController = createLoggedinUseCase(viewManagerModel, makeTransactionViewModel,
-                seeTransactionsViewModel, welcomeViewModel, loggedinViewModel);
+                seeTransactionsViewModel, brokerageViewModel, welcomeViewModel, loggedinViewModel);
 
         return new LoggedinView(loggedinController, loggedinViewModel);
     }
@@ -43,10 +44,11 @@ public final class LoggedinUseCaseFactory {
     private static LoggedinController createLoggedinUseCase(ViewManagerModel viewManagerModel,
                                                             MakeTransactionViewModel makeTransactionViewModel,
                                                             SeeTransactionsViewModel seeTransactionsViewModel,
+                                                            BrokerageViewModel brokerageViewModel,
                                                             WelcomeViewModel welcomeViewModel,
                                                             LoggedinViewModel loggedinViewModel) {
         final LoggedinOutputBoundary loggedinOutputBoundary = new LoggedinPresenter(viewManagerModel,
-                makeTransactionViewModel, seeTransactionsViewModel, welcomeViewModel, loggedinViewModel);
+                makeTransactionViewModel, seeTransactionsViewModel, brokerageViewModel, welcomeViewModel, loggedinViewModel);
 
         final LoggedinInputBoundary loggedinInputBoundary = new LoggedinInteractor(loggedinOutputBoundary);
 
